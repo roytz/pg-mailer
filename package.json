@@ -1,0 +1,24 @@
+{
+  "name": "pg-mailer",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Manage emails queue over PostgreSQL using pg-boss and send them using nodemailer",
+  "author": "roytz",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "nodemailer": "^4.4.1",
+    "pg-boss": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roytz/pg-mailer.git"
+  },
+  "keywords": [
+    "postgresql",
+    "queue",
+    "node",
+    "mail",
+    "mailer"
+  ]
+}
