@@ -2,6 +2,12 @@ const Mailer = require('./mailer');
 
 class PgMailer {
 	constructor(transporter, pgConnection) {
+		if (!transporter) {
+			throw 'Missing nodemailer transporter configuration (as 1st argument)';
+		}
+		if (!pgConnection) {
+			throw 'Missing postgreSQL connection configuration (as 2nd argument)';
+		}
 		this.mailer = new Mailer(transporter, pgConnection);
 	}
 
