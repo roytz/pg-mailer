@@ -14,8 +14,11 @@ class Mailer {
 		this.onAfterSendFail = () => null;
 	}
 
-	async start() {
+	async start(shouldClearQueue) {
 		await this.boss.start();
+		if (shouldClearQueue) {
+			await this.clearQueue();
+		}
 		this.boss.subscribe(this.enueueEmailJobName, this._send.bind(this));
 		return this;
 	}

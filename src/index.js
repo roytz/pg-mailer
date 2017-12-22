@@ -11,7 +11,7 @@ class PgMailer {
 		this.mailer = new Mailer(transporterConfiguration, pgConnection);
 	}
 
-	async start() {
+	async start(shouldClearQueue) {
 		return this.mailer.start();
 	}
 
