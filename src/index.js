@@ -12,7 +12,7 @@ class PgMailer {
 	}
 
 	async start() {
-		await this.mailer.start();
+		return this.mailer.start();
 	}
 
 	async stop() {
