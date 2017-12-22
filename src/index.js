@@ -16,11 +16,11 @@ class PgMailer {
 	}
 
 	async stop() {
-		await this.mailer.stop();
+		return this.mailer.stop();
 	}
 
 	async clearQueue() {
-		await this.mailer.clearQueue();
+		return this.mailer.clearQueue();
 	}
 
 	setQueueOptions(options) {
