@@ -35,19 +35,24 @@ class Mailer {
 	}
 
 	async _send({ id: jobId, data: { email, additionalDetails }, done }) {
-		const onBeforeSendResult = await this.onBeforeSend(jobId, email, additionalDetails);
+		try {
+			const onBeforeSendResult = await this.onBeforeSend(jobId, email, additionalDetails);
 
-		// send mail with defined transport object
-		const res = await this.transporter.sendMail(email);
+			// send mail with defined transport object
+			const emailToSend = _.pick(email, ['from', 'to', 'cc', 'bcc', 'subject', 'text', 'html', 'attachments']);
+			const res = await this.transporter.sendMail(emailToSend);
 
-		if (_.size(res.rejected)) {
-			await this.onAfterSendFail(jobId, res.rejected, onBeforeSendResult);
-			done('Failed');
-			return;
+			if (_.size(res.rejected)) {
+				await this.onAfterSendFail(jobId, res.rejected, additionalDetails, onBeforeSendResult);
+				done('Failed');
+				return;
+			}
+
+			await this.onAfterSendSuccess(jobId, res.accepted, additionalDetails, onBeforeSendResult);
+			done();
+		} catch (e) {
+			done('Error', e);
 		}
-
-		await this.onAfterSendSuccess(jobId, res.accepted, onBeforeSendResult);
-		done();
 	}
 
 	async stop() {

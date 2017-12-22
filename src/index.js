@@ -47,7 +47,8 @@ class PgMailer {
 	// 'onAfterSendSuccess' receives
 	// -- 1st argument: the job id of that queue job
 	// -- 2nd argument: array of the successfull sent emails address
-	// -- 3rd argument: the result of `setOnBeforeSend` function
+	// -- 3rd argument: the additionalDetails passed to the 'enqueueEmail' function
+	// -- 4th argument: the result of `setOnBeforeSend` function
 	setOnAfterSendSuccess(onAfterSendSuccess) {
 		this.mailer.onAfterSendSuccess = onAfterSendSuccess;
 	}
@@ -55,7 +56,8 @@ class PgMailer {
 	// 'setOnAfterSendFail' receives
 	// -- 1st argument: the job id of that queue job
 	// -- 2nd argument: array of the failed sent emails address
-	// -- 3rd argument: the result of `setOnBeforeSend` function
+	// -- 3rd argument: the additionalDetails passed to the 'enqueueEmail' function
+	// -- 4th argument: the result of `setOnBeforeSend` function
 	setOnAfterSendFail(onAfterSendFail) {
 		this.mailer.onAfterSendFail = onAfterSendFail;
 	}
