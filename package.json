@@ -8,8 +8,7 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "nodemailer": "^4.4.1",
-    "pg-boss": "^2.3.4",
-    "pg-mailer": "^1.0.16"
+    "pg-boss": "^2.3.4"
   },
   "repository": {
     "type": "git",
