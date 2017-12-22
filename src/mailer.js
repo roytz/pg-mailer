@@ -59,7 +59,8 @@ class Mailer {
 		return this.boss.stop();
 	}
 
-	async cancelUncompletedQueue() {
+	// cancelUncompletedQueue
+	async clearQueue() {
 		const queue = await this.boss.fetch(this.enueueEmailJobName, 1000);
 		await this.cancel.fail(_.map(queue, 'id'));
 		if (_.size(queue) === 1000) {

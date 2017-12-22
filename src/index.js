@@ -19,6 +19,10 @@ class PgMailer {
 		await this.mailer.stop();
 	}
 
+	async clearQueue() {
+		await this.mailer.clearQueue();
+	}
+
 	setQueueOptions(options) {
 		this.mailer.queueOptions = options;
 	}
