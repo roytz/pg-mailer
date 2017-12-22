@@ -4,7 +4,7 @@
   "license": "MIT",
   "description": "Manage emails queue over PostgreSQL using pg-boss and send them using nodemailer",
   "author": "roytz",
-  "private": true,
+  "main": "./src/index.js",
   "dependencies": {
     "lodash": "^4.17.4",
     "nodemailer": "^4.4.1",
