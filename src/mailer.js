@@ -16,7 +16,8 @@ class Mailer {
 
 	async start() {
 		await this.boss.start();
-		return this.boss.subscribe(this.enueueEmailJobName, this._send.bind(this));
+		this.boss.subscribe(this.enueueEmailJobName, this._send.bind(this));
+		return this;
 	}
 
 	async send(email, additionalDetails) {
