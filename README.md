@@ -22,7 +22,7 @@ const transporterConfiguration = {
 const pgMailer = new PgMailer(transporterConfiguration, pgConnection);
 ```
 
-pg-mailer is a "batteries included" mailer written in Node.js (using PostgreSQL). It uses [pg-boss](https://github.com/timgit/pg-boss) to manage a queue of emails (jobs) that are waiting to be sent and then send them using [nodemailer](https://github.com/nodemailer/nodemailer).
+pg-mailer is a "batteries included" mailer written in Node.js. It uses [pg-boss](https://github.com/timgit/pg-boss) to manage a queue (stored in PostgreSQL DB) of emails (jobs) that are waiting to be sent and then send them using [nodemailer](https://github.com/nodemailer/nodemailer).
 
 If that's all you need, just init it using your custom configurations just like the example above.
 
