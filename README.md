@@ -34,7 +34,7 @@ For more examples/options of transporter configurations (2nd parameter passed to
 
 **returns: the current pg-mailer instance**
 
-Init and start the engine using the configurations passed on the constructor. If you'd like to clear previous uncompleted emails on queue, just pass true (shouldClearQueue) to the `start` function.
+Init and start the engine using the configurations passed on the constructor. If you'd like to clear previous uncompleted emails on queue, just pass `true` (shouldClearQueue) to the `start` function.
 
 ```js
 pgMailer.start();
