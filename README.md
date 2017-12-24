@@ -68,7 +68,7 @@ pgMailer.setQueueOptions(options);
 
 **returns: Promise** *(resolves an object containing `jobId` which is a unique identifier for the job in the queue and `onAfterQueueResult` which is the returend value of the [`setOnAfterQueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#setonafterqueuejobid-email-additionaldetails-onbeforequeueresult) function)*
 
-Enqueues the `email` and returns `jobId` (a unique id of it in the queue). The `additionalDetails` object will be passed to the [Optional Events-Driven Functions](https://github.com/roytz/pg-mailer/blob/master/README.md#optional-events-driven-functions).
+Enqueues the `email` and returns `jobId` (a unique identifier of it in the queue). The `additionalDetails` object will be passed to the [Optional Events-Driven Functions](https://github.com/roytz/pg-mailer/blob/master/README.md#optional-events-driven-functions).
 
 ```js
 const options = {
@@ -101,20 +101,26 @@ pgMailer.stop();
 ### `setOnBeforeQueue(email, additionalDetails)`
 
 **Arguments**
-- `email`: object, the `email` argument passed to the [`enqueue`]() function.
-- `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`]() function.
+- `email`: object, the `email` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
+- `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
 
 Set a function that will be automatically executes right before enqueuing a new email.
 
 This function gets the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
 
 ```js
-pgMailer.setQueueOptions(function(email, additionalDetails) {
+pgMailer.setOnBeforeQueue(function(email, additionalDetails) {
 	// do something
 });
 ```
 
 ### `setOnAfterQueue(jobId, email, additionalDetails, onBeforeQueueResult)`
+
+**Arguments**
+- `jobId`: uuid, the unique identifier of the job (email) in the queue.
+- `email`: object, the `email` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
+- `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
+- `onBeforeQueueResult`: any, the returned value of the function (if defined) [`setOnBeforeQueue`]().
 
 Set a function that will be automatically executes right after enqueuing a new email.
 
