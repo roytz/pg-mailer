@@ -19,10 +19,11 @@
   },
   "keywords": [
     "postgresql",
+    "pg-boss",
     "queue",
     "node",
-    "mail",
-    "mailer"
+    "mailer",
+    "nodemailer"
   ],
   "homepage": "https://github.com/roytz/pg-mailer#readme.md"
 }
