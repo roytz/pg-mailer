@@ -30,12 +30,46 @@ For more examples/options of postgres connection (1st parameter passed to pg-mai
 
 For more examples/options of transporter configurations (2nd parameter passed to pg-mailer constructor), please see [this](https://nodemailer.com/smtp/#examples) configurations page.
 
-## `start(shouldClearQueue)`
+## Basic Usage Functions
 
-**returns: the current pg-mailer instance**
+### `start(shouldClearQueue)`
+
+**returns: Promise** *(resolves the same PgMailer instance used during invocation for convenience)*
 
 Init and start the engine using the configurations passed on the constructor. If you'd like to clear previous uncompleted emails on queue, just pass `true` (shouldClearQueue) to the `start` function.
 
 ```js
 pgMailer.start();
 ```
+
+### `stop()`
+
+Asynchronous function that stops the PgMailer instance from working on active queue. Doesn't clear the queue!
+
+```js
+pgMailer.stop();
+```
+
+### `clearQueue()`
+
+**returns: Promise** *(resolves the number of uncompleted jobs/emails that were cancelled)*
+
+Cancel all uncompleted emails in queue.
+
+```js
+pgMailer.clearQueue();
+```
+
+### `setQueueOptions(options)`
+
+Set the queue options. For the complete options list visit [this](https://github.com/timgit/pg-boss/blob/master/docs/configuration.md#publish-options) link.
+
+```js
+const options = {
+	retryLimit: 3,
+	startIn: 30
+};
+pgMailer.setQueueOptions(options);
+```
+
+## Optional Events-Driven Functions
