@@ -34,6 +34,9 @@ For more examples/options of transporter configurations (2nd parameter passed to
 
 ### `start(shouldClearQueue)`
 
+**Arguments**
+- `shouldClearQueue`: bool
+
 **returns: Promise** *(resolves the same PgMailer instance used during invocation for convenience)*
 
 Init and start the engine using the configurations passed on the constructor. If you'd like to clear previous uncompleted emails on queue, just pass `true` (shouldClearQueue) to the `start` function.
@@ -43,6 +46,9 @@ pgMailer.start();
 ```
 
 ### `setQueueOptions(options)`
+
+**Arguments**
+- `options`: object
 
 Set the queue options. For the complete options list visit [this](https://github.com/timgit/pg-boss/blob/master/docs/configuration.md#publish-options) link.
 
@@ -54,11 +60,15 @@ const options = {
 pgMailer.setQueueOptions(options);
 ```
 
-### `enqueueEmail(email, additionalDetails)`
+### `enqueue(email, additionalDetails)`
 
-**returns: Promise** *(resolves an object containing `jobId` which is a unique identifier for the job in the queue and `onAfterQueueResult` which is the returend value of the `onAfterQueue` function)*
+**Arguments**
+- `email`: object, email to be sent - follow [this](https://nodemailer.com/message/#commmon-fields) options
+- `additionalDetails`: object, additional details that will be passed to the events-driven functions
 
-Set the queue options. For the complete options list visit [this](https://github.com/timgit/pg-boss/blob/master/docs/configuration.md#publish-options) link.
+**returns: Promise** *(resolves an object containing `jobId` which is a unique identifier for the job in the queue and `onAfterQueueResult` which is the returend value of the [`onAfterQueue`]() function)*
+
+Enqueue the `email` and return a unique id of it in the queue. The `additionalDetails` object will be passed to the [Optional Events-Driven Functions]().
 
 ```js
 const options = {
@@ -87,3 +97,51 @@ pgMailer.stop();
 ```
 
 ## Optional Events-Driven Functions
+
+### `setOnBeforeQueue(email, additionalDetails)`
+
+Set a function that will be automatically executes right before enqueuing a new email.
+
+This function gets the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
+
+```js
+pgMailer.setQueueOptions(function(email, additionalDetails) {
+	// do something
+});
+```
+
+### `setOnAfterQueue(jobId, email, additionalDetails, onBeforeQueueResult)`
+
+Set a function that will be automatically executes right after enqueuing a new email.
+
+This function gets `jobId` (as 1st argument) which is the unique id of the email in the queue, the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
+
+```js
+pgMailer.setQueueOptions(function(email, additionalDetails) {
+	// do something
+});
+```
+
+### `setOnBeforeQueue(email, additionalDetails)`
+
+Set a function that will be automatically called right before enqueuing a new email.
+
+This function gets the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
+
+```js
+pgMailer.setQueueOptions(function(email, additionalDetails) {
+	// do something
+});
+```
+
+### `setOnBeforeQueue(email, additionalDetails)`
+
+Set a function that will be automatically called right before enqueuing a new email.
+
+This function gets the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
+
+```js
+pgMailer.setQueueOptions(function(email, additionalDetails) {
+	// do something
+});
+```
