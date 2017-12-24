@@ -42,12 +42,30 @@ Init and start the engine using the configurations passed on the constructor. If
 pgMailer.start();
 ```
 
-### `stop()`
+### `setQueueOptions(options)`
 
-Asynchronous function that stops the PgMailer instance from working on active queue. Doesn't clear the queue!
+Set the queue options. For the complete options list visit [this](https://github.com/timgit/pg-boss/blob/master/docs/configuration.md#publish-options) link.
 
 ```js
-pgMailer.stop();
+const options = {
+	retryLimit: 3,
+	startIn: 30
+};
+pgMailer.setQueueOptions(options);
+```
+
+### `enqueueEmail(email, additionalDetails)`
+
+**returns: Promise** *(resolves an object containing `jobId` which is a unique identifier for the job in the queue and `onAfterQueueResult` which is the returend value of the `onAfterQueue` function)*
+
+Set the queue options. For the complete options list visit [this](https://github.com/timgit/pg-boss/blob/master/docs/configuration.md#publish-options) link.
+
+```js
+const options = {
+	retryLimit: 3,
+	startIn: 30
+};
+pgMailer.setQueueOptions(options);
 ```
 
 ### `clearQueue()`
@@ -60,16 +78,12 @@ Cancel all uncompleted emails in queue.
 pgMailer.clearQueue();
 ```
 
-### `setQueueOptions(options)`
+### `stop()`
 
-Set the queue options. For the complete options list visit [this](https://github.com/timgit/pg-boss/blob/master/docs/configuration.md#publish-options) link.
+Asynchronous function that stops the PgMailer instance from working on active queue. Doesn't clear the queue!
 
 ```js
-const options = {
-	retryLimit: 3,
-	startIn: 30
-};
-pgMailer.setQueueOptions(options);
+pgMailer.stop();
 ```
 
 ## Optional Events-Driven Functions
