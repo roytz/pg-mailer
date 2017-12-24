@@ -19,7 +19,7 @@ const transporterConfiguration = {
             pass: 'password'
 };
 
-const mailer = new PgMailer(transporterConfiguration, pgConnection);
+const pgMailer = new PgMailer(transporterConfiguration, pgConnection);
 ```
 
 pg-mailer is a "batteries included" mailer written in Node.js (using PostgreSQL). It uses [pg-boss](https://github.com/timgit/pg-boss) to manage a queue of emails (jobs) that are waiting to be sent and then send them using [nodemailer](https://github.com/nodemailer/nodemailer).
@@ -29,3 +29,13 @@ If that's all you need, just init it using your custom configurations just like 
 For more examples/options of postgres connection (1st parameter passed to pg-mailer constructor), please see [this](https://github.com/timgit/pg-boss/blob/master/docs/usage.md#newconnectionstring) configurations page.
 
 For more examples/options of transporter configurations (2nd parameter passed to pg-mailer constructor), please see [this](https://nodemailer.com/smtp/#examples) configurations page.
+
+## `start(shouldClearQueue)`
+
+**returns: the current pg-mailer instance**
+
+Init and start the engine using the configurations passed on the constructor. If you'd like to clear previous uncompleted emails on queue, just pass true (shouldClearQueue) to the `start` function.
+
+```js
+pgMailer.start();
+```
