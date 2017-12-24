@@ -23,5 +23,6 @@
     "node",
     "mail",
     "mailer"
-  ]
+  ],
+  "homepage": "https://github.com/roytz/pg-mailer#readme.md"
 }
