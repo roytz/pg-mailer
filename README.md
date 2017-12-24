@@ -147,14 +147,30 @@ pgMailer.setOnBeforeSend(function(jobId, email, additionalDetails) {
 
 **Arguments**
 - `jobId`: uuid, the unique identifier of the job (email) in the queue.
-- `email`: array, all the email addresses the email was successfully sent to.
+- `successedAddresses`: array, all the email addresses the email was successfully sent to.
 - `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
-- `onBeforeSendResult`: any, the returned value of the function (if defined) [`setOnBeforeSendResult`](https://github.com/roytz/pg-mailer/blob/master/README.md#setonbeforequeueemail-additionaldetails).
+- `onBeforeSendResult`: any, the returned value of the function (if defined) [`setOnBeforeSendResult`](https://github.com/roytz/pg-mailer/blob/master/README.md#setonbeforesendjobid-email-additionaldetails).
 
-Set a function that will be automatically executes right before sending the email.
+Set a function that will be automatically executes right after successfully sending the email.
 
 ```js
 pgMailer.setOnAfterSendSuccess(function(jobId, successedAddresses, additionalDetails, onBeforeSendResult) {
+	// do something
+});
+```
+
+### `setOnAfterSendFail(jobId, failedAddresses, additionalDetails, onBeforeSendResult)`
+
+**Arguments**
+- `jobId`: uuid, the unique identifier of the job (email) in the queue.
+- `failedAddresses`: array, all the email addresses the email was failed to be sent to.
+- `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
+- `onBeforeSendResult`: any, the returned value of the function (if defined) [`setOnBeforeSendResult`](https://github.com/roytz/pg-mailer/blob/master/README.md#setonbeforesendjobid-email-additionaldetails).
+
+Set a function that will be automatically executes right after failed attempt to send the email.
+
+```js
+pgMailer.setOnAfterSendFail(function(jobId, failedAddresses, additionalDetails, onBeforeSendResult) {
 	// do something
 });
 ```
