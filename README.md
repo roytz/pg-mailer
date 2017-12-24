@@ -106,8 +106,6 @@ pgMailer.stop();
 
 Set a function that will be automatically executes right before enqueuing a new email.
 
-This function gets the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
-
 ```js
 pgMailer.setOnBeforeQueue(function(email, additionalDetails) {
 	// do something
@@ -120,38 +118,43 @@ pgMailer.setOnBeforeQueue(function(email, additionalDetails) {
 - `jobId`: uuid, the unique identifier of the job (email) in the queue.
 - `email`: object, the `email` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
 - `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
-- `onBeforeQueueResult`: any, the returned value of the function (if defined) [`setOnBeforeQueue`]().
+- `onBeforeQueueResult`: any, the returned value of the function (if defined) [`setOnBeforeQueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#setonbeforequeueemail-additionaldetails).
 
-Set a function that will be automatically executes right after enqueuing a new email.
-
-This function gets `jobId` (as 1st argument) which is the unique id of the email in the queue, the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
+Set a function that will be automatically executes right after enqueuing a new email. Can return a value that will be returned as part of the object returned from the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
 
 ```js
-pgMailer.setQueueOptions(function(email, additionalDetails) {
+pgMailer.setOnAfterQueue(function(jobId, email, additionalDetails, onBeforeQueueResult) {
 	// do something
 });
 ```
 
-### `setOnBeforeQueue(email, additionalDetails)`
+### `setOnBeforeSend(jobId, email, additionalDetails)`
 
-Set a function that will be automatically called right before enqueuing a new email.
+**Arguments**
+- `jobId`: uuid, the unique identifier of the job (email) in the queue.
+- `email`: object, the `email` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
+- `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
 
-This function gets the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
+Set a function that will be automatically executes right before sending the email.
 
 ```js
-pgMailer.setQueueOptions(function(email, additionalDetails) {
+pgMailer.setOnBeforeSend(function(jobId, email, additionalDetails) {
 	// do something
 });
 ```
 
-### `setOnBeforeQueue(email, additionalDetails)`
+### `setOnAfterSendSuccess(jobId, successedAddresses, additionalDetails, onBeforeSendResult)`
 
-Set a function that will be automatically called right before enqueuing a new email.
+**Arguments**
+- `jobId`: uuid, the unique identifier of the job (email) in the queue.
+- `email`: array, all the email addresses the email was successfully sent to.
+- `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#enqueueemail-additionaldetails) function.
+- `onBeforeSendResult`: any, the returned value of the function (if defined) [`setOnBeforeSendResult`](https://github.com/roytz/pg-mailer/blob/master/README.md#setonbeforequeueemail-additionaldetails).
 
-This function gets the `email` and `additionalDetails` (as 1st and 2nd arguments) arguments that were passed to the [`enqueue`]() function.
+Set a function that will be automatically executes right before sending the email.
 
 ```js
-pgMailer.setQueueOptions(function(email, additionalDetails) {
+pgMailer.setOnAfterSendSuccess(function(jobId, successedAddresses, additionalDetails, onBeforeSendResult) {
 	// do something
 });
 ```
