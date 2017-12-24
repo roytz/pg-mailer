@@ -1,0 +1,11 @@
+sudo: required
+dist: trusty
+addons:
+    postgresql: "9.5"
+services:
+    - postgresql
+language: node_js
+node_js:
+  - "8"
+  - "6"
+  - "4"

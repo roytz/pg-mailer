@@ -5,6 +5,9 @@
   "description": "Manage emails queue over PostgreSQL using pg-boss and send them using nodemailer",
   "author": "roytz",
   "main": "./src/index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "dependencies": {
     "lodash": "^4.17.4",
     "nodemailer": "^4.4.1",
