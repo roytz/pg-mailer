@@ -66,9 +66,9 @@ pgMailer.setQueueOptions(options);
 - `email`: object, email to be sent - follow [this](https://nodemailer.com/message/#commmon-fields) options
 - `additionalDetails`: object, additional details that will be passed to the events-driven functions
 
-**returns: Promise** *(resolves an object containing `jobId` which is a unique identifier for the job in the queue and `onAfterQueueResult` which is the returend value of the [`onAfterQueue`]() function)*
+**returns: Promise** *(resolves an object containing `jobId` which is a unique identifier for the job in the queue and `onAfterQueueResult` which is the returend value of the [`setOnAfterQueue`](https://github.com/roytz/pg-mailer/blob/master/README.md#setonafterqueuejobid-email-additionaldetails-onbeforequeueresult) function)*
 
-Enqueue the `email` and return a unique id of it in the queue. The `additionalDetails` object will be passed to the [Optional Events-Driven Functions]().
+Enqueues the `email` and returns `jobId` (a unique id of it in the queue). The `additionalDetails` object will be passed to the [Optional Events-Driven Functions](https://github.com/roytz/pg-mailer/blob/master/README.md#optional-events-driven-functions).
 
 ```js
 const options = {
@@ -99,6 +99,10 @@ pgMailer.stop();
 ## Optional Events-Driven Functions
 
 ### `setOnBeforeQueue(email, additionalDetails)`
+
+**Arguments**
+- `email`: object, the `email` argument passed to the [`enqueue`]() function.
+- `additionalDetails`: object, the `additionalDetails` argument passed to the [`enqueue`]() function.
 
 Set a function that will be automatically executes right before enqueuing a new email.
 
